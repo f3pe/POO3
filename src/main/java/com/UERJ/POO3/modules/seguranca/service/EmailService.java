@@ -33,4 +33,12 @@ public class EmailService {
 
         System.out.println("E-mail de recuperação enviado para: " + destinatario);
     }
+    public void enviarEmailAlertaEstoque(String destinatario, String assunto, String texto){
+        SimpleMailMessage mensagem = new SimpleMailMessage();
+        mensagem.setFrom("nao-responda@petshoperp.com.br");
+        mensagem.setTo(destinatario);
+        mensagem.setSubject(assunto);
+        mensagem.setText(texto);
+        mailSender.send(mensagem);
+    }
 }

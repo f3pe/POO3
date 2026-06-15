@@ -15,7 +15,6 @@ import jakarta.annotation.security.PermitAll;
 @PermitAll
 public class MainLayout extends AppLayout {
 
-    // O AuthenticationContext nos permite fazer o logout seguro no Spring Security com 1 linha de código
     private final AuthenticationContext authContext;
 
     public MainLayout(AuthenticationContext authContext) {
@@ -30,7 +29,6 @@ public class MainLayout extends AppLayout {
                 .set("font-size", "var(--lumo-font-size-l)")
                 .set("margin", "0");
 
-        // O DrawerToggle é aquele ícone de "hambúrguer" (3 linhas) que abre e fecha o menu lateral
         DrawerToggle toggle = new DrawerToggle();
 
         Button btnLogout = new Button("Sair", VaadinIcon.SIGN_OUT.create());
@@ -51,11 +49,10 @@ public class MainLayout extends AppLayout {
         RouterLink linkVendas = new RouterLink("Ponto de Venda", VendaView.class);
         RouterLink linkEstoque = new RouterLink("Gestão de Estoque", ProdutoView.class);
         RouterLink linkCompras = new RouterLink("Fornecedores e Compras", FornecedorView.class);
-
-        // Deixei o de Relatórios comentado para descomentarmos no nosso próximo bloco de trabalho
         RouterLink linkRelatorios = new RouterLink("Relatórios Financeiros", RelatorioView.class);
+        RouterLink linkUsuarios = new RouterLink("Gestão de Utilizadores", GestaoUsuariosView.class);
 
-        VerticalLayout menu = new VerticalLayout(linkDashboard, linkVendas, linkEstoque, linkCompras, linkRelatorios);
+        VerticalLayout menu = new VerticalLayout(linkDashboard, linkVendas, linkEstoque, linkCompras, linkRelatorios, linkUsuarios);
         addToDrawer(menu);
     }
 }

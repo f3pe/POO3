@@ -29,7 +29,7 @@ import jakarta.annotation.security.RolesAllowed;
 
 import java.util.List;
 
-@Route("estoque")
+@Route(value = "estoque", layout = MainLayout.class)
 @PageTitle("Gestão de Estoque - Petshop ERP")
 @RolesAllowed({"ADMIN", "GERENTE"})
 public class ProdutoView extends VerticalLayout {

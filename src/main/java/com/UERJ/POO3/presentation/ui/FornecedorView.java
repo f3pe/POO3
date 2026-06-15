@@ -24,7 +24,7 @@ import jakarta.annotation.security.RolesAllowed;
 
 import java.util.List;
 
-@Route("fornecedores")
+@Route(value = "fornecedores", layout = MainLayout.class)
 @PageTitle("Gestão de Fornecedores - Petshop ERP")
 // Proteção de Rota: Apenas Admin e Gerente podem gerir compras
 @RolesAllowed({"ADMIN", "GERENTE"})

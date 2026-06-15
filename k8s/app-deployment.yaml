@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petshop-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petshop-app
+  template:
+    metadata:
+      labels:
+        app: petshop-app
+    spec:
+      containers:
+        - name: petshop-app
+          image: petshop-app:latest # Nome da imagem gerada pelo Docker
+          imagePullPolicy: Never # Usa a imagem local da nossa máquina
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: petshop-config
+                  key: db-url
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: petshop-config
+                  key: db-username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: petshop-secret
+                  key: db-password
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: update
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: petshop-app-service
+spec:
+  type: NodePort # Expõe a porta para o navegador externo
+  selector:
+    app: petshop-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30080 # O ERP ficará acessível na porta 30080 do cluster

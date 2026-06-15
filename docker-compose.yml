@@ -4,6 +4,7 @@ services:
   db:
     image: postgres:15
     container_name: petshop_db
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: POO3_123
@@ -12,6 +13,21 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: petshop_app
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      # O Spring Boot vai usar o nome do serviço 'db' para se conectar, em vez de 'localhost'
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/petshop_erp
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=POO3_123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 volumes:
   postgres_data:

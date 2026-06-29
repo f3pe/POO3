@@ -28,7 +28,7 @@ import java.util.List;
 
 @Route(value = "usuarios", layout = MainLayout.class)
 @PageTitle("Gestão de Usuários - Petshop ERP")
-@RolesAllowed({"ADMIN", "GERENTE"})
+@RolesAllowed({"ADMIN"})
 public class GestaoUsuariosView extends VerticalLayout {
 
     private final UsuarioRepository usuarioRepository;

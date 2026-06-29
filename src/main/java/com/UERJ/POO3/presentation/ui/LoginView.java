@@ -34,7 +34,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         // Redireciona para a nossa tela de recuperação de senha quando o usuário clica em "Esqueci a senha"
         loginForm.addForgotPasswordListener(e -> UI.getCurrent().navigate(RecuperacaoSenhaView.class));
 
-        // Botão visual para o requisito de OAuth2 (Google)
+        // Botão visual para o OAuth2 (Google)
         Button btnGoogle = new Button("Entrar com Google", new Icon(VaadinIcon.GOOGLE_PLUS));
         btnGoogle.addThemeVariants(ButtonVariant.LUMO_ERROR); // Deixa o botão vermelho (estilo Google)
         btnGoogle.setWidthFull();

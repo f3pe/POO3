@@ -26,6 +26,11 @@ public class SecurityConfig {
                 vaadinSecurity.loginView(LoginView.class)
         );
 
+        http.oauth2Login(oauth2 -> oauth2
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true) // Redireciona para o Dashboard após logar com Google
+        );
+
         return http.build();
     }
 
